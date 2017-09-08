@@ -1,0 +1,92 @@
+var _user$project$Update$validateForm = function (form) {
+	return (_elm_lang$core$Native_Utils.cmp(
+		_elm_lang$core$String$length(form.formName),
+		3) < 0) ? {
+		ctor: '_Tuple2',
+		_0: _elm_lang$core$Native_Utils.update(
+			form,
+			{
+				validation: _user$project$Models$Error('Name should be at least 3 characters long')
+			}),
+		_1: _elm_lang$core$Platform_Cmd$none
+	} : (_elm_lang$core$String$isEmpty(form.formBox) ? {
+		ctor: '_Tuple2',
+		_0: _elm_lang$core$Native_Utils.update(
+			form,
+			{
+				validation: _user$project$Models$Error('You must choose a box number')
+			}),
+		_1: _elm_lang$core$Platform_Cmd$none
+	} : {
+		ctor: '_Tuple2',
+		_0: _elm_lang$core$Native_Utils.update(
+			form,
+			{validation: _user$project$Models$ValidationOk}),
+		_1: _elm_lang$core$Platform_Cmd$none
+	});
+};
+var _user$project$Update$updateForm = F2(
+	function (formMsg, form) {
+		var _p0 = formMsg;
+		switch (_p0.ctor) {
+			case 'ChangeName':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						form,
+						{formName: _p0._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'ChangeBox':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						form,
+						{formBox: _p0._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			default:
+				return _user$project$Update$validateForm(form);
+		}
+	});
+var _user$project$Update$update = F2(
+	function (msg, model) {
+		var _p1 = msg;
+		switch (_p1.ctor) {
+			case 'OnLocationChange':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							route: _user$project$Routing$parseLocation(_p1._0)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'FormMsg':
+				var _p2 = A2(_user$project$Update$updateForm, _p1._0, model.form);
+				var newForm = _p2._0;
+				var formCmd = _p2._1;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{form: newForm}),
+					_1: formCmd
+				};
+			default:
+				if (_p1._0.ctor === 'Ok') {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{
+								currentOperator: _elm_lang$core$Maybe$Just(_p1._0._0)
+							}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				} else {
+					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+				}
+		}
+	});

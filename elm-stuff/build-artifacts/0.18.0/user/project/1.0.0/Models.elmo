@@ -1,0 +1,32 @@
+var _user$project$Models$Operator = F3(
+	function (a, b, c) {
+		return {position: a, name: b, box: c};
+	});
+var _user$project$Models$OperatorForm = F3(
+	function (a, b, c) {
+		return {formName: a, formBox: b, validation: c};
+	});
+var _user$project$Models$Model = F4(
+	function (a, b, c, d) {
+		return {operators: a, currentOperator: b, form: c, route: d};
+	});
+var _user$project$Models$ValidationOk = {ctor: 'ValidationOk'};
+var _user$project$Models$initialModel = function (route) {
+	return {
+		operators: {
+			ctor: '::',
+			_0: A3(_user$project$Models$Operator, 1, 'Nacho', 85),
+			_1: {
+				ctor: '::',
+				_0: A3(_user$project$Models$Operator, 2, 'Nacho2', 84),
+				_1: {ctor: '[]'}
+			}
+		},
+		currentOperator: _elm_lang$core$Maybe$Nothing,
+		form: A3(_user$project$Models$OperatorForm, '', '', _user$project$Models$ValidationOk),
+		route: route
+	};
+};
+var _user$project$Models$Error = function (a) {
+	return {ctor: 'Error', _0: a};
+};
